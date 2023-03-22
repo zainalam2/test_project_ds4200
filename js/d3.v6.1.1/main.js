@@ -83,6 +83,7 @@ d3.csv("data/Spotify_Songs_Subset.csv").then((data) => {
 
 
  
+
       function zoomed(selection) {
         var x0 = d3.min(selection.data(), function(d) { return d.loudness; });
         var y0 = d3.min(selection.data(), function(d) { return d.acousticness; });
@@ -100,7 +101,7 @@ d3.csv("data/Spotify_Songs_Subset.csv").then((data) => {
     // shows the brushing
     function displayBrush(event) {
         selection = event.selection;
-        Points.classed("selected", function(d){ return isSelected(selection, X_SCALE(d.loudness) + MARGINS.left, Y_SCALE(d.acousticness) + MARGINS.top); })
+        Points.classed("selected", function(d){ return isSelected(selection, (X_SCALE(Math.abs(parseFloat(d.loudness))) + 2 * MARGINS.left), ((Y_SCALE(Math.abs(parseFloat(d.acousticness))) + MARGINS.top)); })
         zoomed(selection)
 
     };
@@ -113,9 +114,6 @@ d3.csv("data/Spotify_Songs_Subset.csv").then((data) => {
             y1 = coords[1][1];
         return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
       };
-    
-
-});
 
 
     
