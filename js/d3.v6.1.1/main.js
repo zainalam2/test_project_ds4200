@@ -114,6 +114,8 @@ d3.csv("data/Spotify_Songs_Subset.csv").then((data) => {
             y1 = coords[1][1];
         return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
       };
+    
 
 });
+
     
