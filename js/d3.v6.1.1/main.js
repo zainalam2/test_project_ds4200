@@ -83,12 +83,11 @@ d3.csv("data/Spotify_Songs_Subset.csv").then((data) => {
 
 
  
-
       function zoomed(selection) {
-        var x0 = d3.min(selection.data(), function(d) { return d.x; });
-        var y0 = d3.min(selection.data(), function(d) { return d.y; });
-        var x1 = d3.max(selection.data(), function(d) { return d.x; });
-        var y1 = d3.max(selection.data(), function(d) { return d.y; });
+        var x0 = d3.min(selection.data(), function(d) { return d.loudness; });
+        var y0 = d3.min(selection.data(), function(d) { return d.acousticness; });
+        var x1 = d3.max(selection.data(), function(d) { return d.loudness; });
+        var y1 = d3.max(selection.data(), function(d) { return d.acousticness; });
         SCATTER_FRAME.transition()
           .duration(750)
           .call(zoom.transform, d3.zoomIdentity
