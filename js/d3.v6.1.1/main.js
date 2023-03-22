@@ -48,9 +48,7 @@ d3.csv("data/Spotify_Songs_Subset.csv").then((data) => {
                         .domain([0, MAX_Y])
                         .range([SCATTER_HEIGHT, 0]);
 
-    const zoom = d3.zoom()
-    .scaleExtent([1, 10]) // Set the minimum and maximum zoom levels
-    .on("zoom", zoomed);
+  
 
     // plot the scatter points
     let Points = SCATTER_FRAME.selectAll("circle")
@@ -79,41 +77,6 @@ d3.csv("data/Spotify_Songs_Subset.csv").then((data) => {
         (MARGINS.top) +  ")")
         .call(d3.axisLeft(Y_SCALE).ticks(10))
             .attr("font-size", "12px");
-
-
-
- 
-
-      function zoomed(selection) {
-        var x0 = d3.min(selection.data(), function(d) { return d.loudness; });
-        var y0 = d3.min(selection.data(), function(d) { return d.acousticness; });
-        var x1 = d3.max(selection.data(), function(d) { return d.loudness; });
-        var y1 = d3.max(selection.data(), function(d) { return d.acousticness; });
-        SCATTER_FRAME.transition()
-          .duration(750)
-          .call(zoom.transform, d3.zoomIdentity
-            .scale(Math.min(FRAME_WIDTH / (X_SCALE(x1) - X_SCALE(x0)), FRAME_HEIGHT / (Y_SCALE(y1) - Y_SCALE(y0))))
-            .translate(-(X_SCALE(x0) + X_SCALE(x1)) / 2, -(Y_SCALE(y0) + Y_SCALE(y1)) / 2));
-       };
-
-    SCATTER_FRAME.call(zoom)
-
-    // shows the brushing
-    function displayBrush(event) {
-        selection = event.selection;
-        Points.classed("selected", function(d){ return isSelected(selection, (X_SCALE(Math.abs(parseFloat(d.loudness))) + 2 * MARGINS.left), ((Y_SCALE(Math.abs(parseFloat(d.acousticness))) + MARGINS.top)); })
-        zoomed(selection)
-
-    };
-
-      // when selecting a point to be brushed
-      function isSelected(coords, cx, cy) {
-        let x0 = coords[0][0],
-            x1 = coords[1][0],
-            y0 = coords[0][1],
-            y1 = coords[1][1];
-        return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
-      };
     
 
 });
