@@ -6,8 +6,50 @@ h1 {
     text-align: center;
 }
 
-.selected {
-    opacity: 100%;
-    stroke: yellow;
-    stroke-width: 4px;
+#vis1-title {
+    text-align: center
+    
+}
+
+#color-key-min,
+#color-key-max  {
+  font-size: 10px;
+}
+/* create class for tooltip attributes*/
+#tooltip {
+    /* position: absolute; */
+    background-color: white;
+    border:  solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .scatter {
+    position: relative;
+    max-width: 50%;
+  }
+#legend {
+  position: absolute;
+  display: flex;
+  
+
+}
+
+
+  #color-key {
+    /* position: absolute; */
+    transform: rotate(180deg);
+    height: 10px;
+    width: 60%;
+    /* top: 75px; */
+    /* left: 30%;  */
+  } 
+
+.inactive {
+    fill: forestgreen;
+}
+
+.active {
+  fill: red;
 }
