@@ -18,23 +18,94 @@
 
     <div>
         <h2>Motivation</h2>
-        TODO: Add motivation / test 5
+        <p>Music preferences are subjective and with the magnitude of content on streaming platforms, finding new music can be a challenge. 
+            For our project, we want to focus on exploring new music through similar songs using Spotify's API. 
+            The domain tasks that our visualizations will support include exploring and comparing musical attributes from a dataset of songs along with supporting song recommendation and the discovery of new music. 
+            Users should be able to identify musical attributes of songs that they enjoy to find similarly structured music that could appeal to them. 
+            Our visualization simplifies this discovery by depicting the distribution of songs in a digestible scatter plot format for users to navigate and explore. 
+            Finding which musical attributes characterize a particular song (danceability, energy, etc.) is useful for helping users expand on their music taste, and our visualization allows users to filter on these attributes to create the x and y axes. 
+            Songs that have similar attributes are grouped together through their position on our graph. Our target user for this visualization is anyone who is interested in learning more about their music preferences and wants to find more songs they would like to listen to, and we provide a tooltip for our users when they hover over a point on a graph that tells them the song information
+            </p>
     </div>
 
     <div>
         <h2>Background</h2>
-        TODO: Add link to report, demo video, link to data etc. here  
+        TODO: Add link to report, demo video, link to data etc. here
+        <h4>Data <a href="https://www.kaggle.com/datasets/a63964c0b3cc0a9b70b77c198678bb770f1ed41f6f6c6543f80ccee40d5ddaa1?resource=download">(Link)</a></h4>
+        <div>
+            <p>The creator of the dataset we used made a query to gather data from the Spotify API to help them identify what factors make up a song released on Spotiy. The query was run and data was collected from the Spotify API on 12/8/2020, using a query for every letter of the alphabet. 
+            The original dataset contained 46 columns and over 10,000 rows. For the purposes of this assignment, a random subset of 2,000 rows was selected using a python script. 
+            In terms of biases and ethical considerations, one facet is the columns that were collected. Since our study is reliant on a query written by another party, there may have been a bias in the song selection process that is unknown to our team or a bias in writing this query. 
+            For example, popularity is an attribute that can only be gauged through the information present at a specific moment in time. Popularity is likely pulled based on the number of streams in that moment, and external factors that may cause a song to be streamed frequently at a time are not clear. 
+            Additionally, a consideration might be the bias present in Spotify's assignment of characteristics like valence (the "mood" of a song), which is more subjective and difficult to quantify. Ethical considerations might include the manner in which Spotify is gathering/storing data from users and artists.
+            To clean the data, we first removed all columns that were not relevant to our analysis. For example, there was a lot of API data that were added as columns so these were deleted (i.e. album.external_urls.spotify, external_ids.isrc, external_urls.spotify). Additionally, columns that had data that was not unique, unuseful or repetitive for differentiating tracks were removed (i.e. time signature, track number, disc number). 
+            Next, we changed the 'key' column to include the actual key string (derived from the data dictionary in Spotify's API documentation) rather than the key id. Then, we replaced the album release date column data to just include the release year as some rows only included the year rather than the full date. Finally, we removed rows that contained missing values and renamed the column headers to be more readable.
+            At this stage, changes that we have made since our initial proposal sketch include: using a two axes grid rather than a four-quadrant grid for our scatterplot, our channel of color will now depict how long ago a song was released instead of encoding the same attribute twice (position and color for grouping), and our loudness attribute was converted to a positive scale instead of a negative scale for standardization purposes.
+            </p>
+        </div>
     </div>
 
     <div>
         <h2>Visualization</h2>
-        TODO: Build your visualization tool here
-        <div class="scatter"></div>  
+        
+        
+        <div class="scatter">
+            <h4 id="vis1-title">Spotify Song Attributes</h4>
+            <div id="legend">
+                <p id="color-key-min">Min Album Release Date (1945)</p>
+                <img src="Greens.png" alt="color_bar" id="color-key"><p></p>
+                <p id="color-key-max">Max Album Release Date (2020)</p>
+            </div>
+        </div>
+        
+        
+        
+        <p id = "click-point"></p>
+
+            <h4> Choose Axes </h4>
+
+            <!--dropdowns for x and y coordinates-->
+            <form id ='show-pt'>
+
+              <label>Select X Axes:</label>
+              
+              <select form="show-pt" id="x">
+                <option value="Energy">Energy</option>
+                <option value="Danceability" selected>Danceability</option>
+                <option value="Instrumentalness">Instrumentalness</option>
+                <option value="Liveness">Liveness</option>
+                <option value="Loudness">Loudness</option>
+                <option value="Tempo">Tempo</option>
+                <option value="Valence">Valence</option>
+              </select>
+
+              <br>
+
+              <label>Select Y Axes:</label>
+              
+              <select form="show-pt" id="y">
+                <option value="Energy">Energy</option>
+                <option value="Danceability">Danceability</option>
+                <option value="Instrumentalness">Instrumentalness</option>
+                <option value="Liveness">Liveness</option>
+                <option value="Loudness" selected>Loudness</option>
+                <option value="Tempo">Tempo</option>
+                <option value="Valence">Valence</option>
+              </select>
+        
+            </form>
+
+            <!--create button-->
+            <button type="button" onClick = "changeAttributes()" id="create-pt">Create</button>
+    </div>
+        <br> 
+        <div class="bar"></div>
     </div>
 
     <div>
         <h2>Acknowledgements</h2>
-        TODO: Cite resources used here   
+         
+        <a href="https://d3-graph-gallery.com/graph/interactivity_brush.html">Source 1</a>  
     </div>
 
 <!-- connect webpage to Javascript file -->
